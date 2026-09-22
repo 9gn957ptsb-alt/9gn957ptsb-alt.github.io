@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matthew Livingston</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="2; url=/Art-Database/">
+<script>
+/* The site used to live at /Color-Middling/. The repository was renamed to
+   Art-Database, and GitHub Pages serves a project only under its current
+   name, so every old link had become a 404. This repository is the user site
+   for 9gn957ptsb-alt.github.io: GitHub hands it every path no project claims,
+   /Color-Middling/... included, and this sends each one on to the same place
+   under /Art-Database/ — the rest of the path, the query and the hash kept.
+
+   ?v=2 was never a route: the Artist Website is the /v2/ folder, and nothing
+   read the query. A link that says v=2 plainly means that site, so it goes
+   there. A plain /Color-Middling/ still goes to the portfolio at the root,
+   which is the link that was submitted to the open call. */
+function forwardTo(pathname, search, hash) {
+  var path = pathname;
+  if (/^\/color-middling(\/|$)/i.test(path)) {
+    path = path.replace(/^\/color-middling/i, "/Art-Database");
+  } else if (path === "/" || path === "") {
+    path = "/Art-Database/";
+  } else {
+    return null;                       // not an old link: a real 404
+  }
+  if (/^\/Art-Database$/.test(path)) { path += "/"; }
+
+  if (/(^|[?&])v=2(&|$)/.test(search.replace(/^\?/, "")) &&
+      /^\/Art-Database\/(index\.html)?$/.test(path)) {
+    path = "/Art-Database/v2/";
+    search = ("?" + search.replace(/^\?/, "").split("&")
+      .filter(function (p) { return p && p !== "v=2"; }).join("&"))
+      .replace(/^\?$/, "");
+  }
+  return path + search + hash;
+}
+
+if (typeof module !== "undefined") { module.exports = forwardTo; }
+if (typeof location !== "undefined") {
+  var to = forwardTo(location.pathname, location.search, location.hash);
+  if (to) { location.replace(to); }
+}
+</script>
+<style>
+  body { font: 16px/1.5 Georgia, serif; color: #1b1d24; background: #e9eaee;
+         margin: 0; min-height: 100vh; display: grid; place-items: center; }
+  p { margin: 0 16px; max-width: 32em; text-align: center; }
+  a { color: inherit; }
+</style>
+</head>
+<body>
+<p>Matthew Livingston’s site has moved to <a href="https://9gn957ptsb-alt.github.io/Art-Database/">9gn957ptsb-alt.github.io/Art-Database</a>.</p>
+</body>
+</html>
